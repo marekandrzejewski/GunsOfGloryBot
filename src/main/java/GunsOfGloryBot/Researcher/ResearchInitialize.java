@@ -2,6 +2,7 @@ package GunsOfGloryBot.Researcher;
 
 import GunsOfGloryBot.ArmyTrainer.TrainArmy;
 import GunsOfGloryBot.BotInterface;
+import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
 
 import javax.swing.*;
@@ -17,6 +18,8 @@ public class ResearchInitialize extends Thread{
     PickPointAndClick pickPointAndClick = new PickPointAndClick();
     Research research = new Research();
     MouseActions mouse = new MouseActions();
+    String isResearching1 = "C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching.png";
+    String fragmentAkademii = "C:\\Users\\Admin\\Desktop\\goggraphics\\fragmentakademii.png";
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -67,24 +70,30 @@ public class ResearchInitialize extends Thread{
         setSecond(0);
     }
 
-    public void researchDevelop() throws InterruptedException, AWTException {
+    public void researchDevelop() throws AWTException {
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
-        System.out.println("wykonujemy badanie Develop, minęło 900 sekund");
+        System.out.println("wykonujemy badanie Develop, minęło 300 sekund");
         botInterface.isMakingOrders = true;
         trainArmy.setSecond(trainArmy.getSecond() - 60);
 
         research.goToAcademyAndResearch();
 
+        if (!ImageOnScreen.isOnScreen(isResearching1) && ImageOnScreen.isOnScreen(fragmentAkademii)){
+            System.out.println("nie ma badań, wykonujemy rozkaz BADANIA");
+            //repeatable, now to general
+            research.pickDevelopCategory();
 
-        //repeatable, now to general
-        research.pickDevelopCategory();
+            //pick a point and click
+            pickPointAndClick.pickTopAndClick();
+        } else if (ImageOnScreen.isOnScreen(isResearching1) && ImageOnScreen.isOnScreen(fragmentAkademii)){
+            System.out.println("badania się wykonują");
+            mouse.closeAcademyScreen();
+        }
+        else {
+            System.out.println("nie widać ekranu akademii, nie robimy nic");
+        }
 
-        //pick a point and click
-        pickPointAndClick.pickTopAndClick();
-
-//        System.out.println("usypiamy wątek BADANIA DEVELOP na 5 minut na czas wykonywania BADAŃ");
-//        Thread.sleep(300000);
         botInterface.isMakingOrders = false;
         System.out.println("wykonano rozkaz BADANIA DEVELOP");
         setSecond(0);
@@ -98,12 +107,20 @@ public class ResearchInitialize extends Thread{
 
         research.goToAcademyAndResearch();
 
-        //repeatable, now to general
-        research.pickFightCategory();
+        if (!ImageOnScreen.isOnScreen(isResearching1) && ImageOnScreen.isOnScreen(fragmentAkademii)){
+            System.out.println("nie ma badań, wykonujemy rozkaz BADANIA");
+            //repeatable, now to fight
+            research.pickFightCategory();
 
-        //pick a point and click
-        pickPointAndClick.pickTopAndClick();
-
+            //pick a point and click
+            pickPointAndClick.pickTopAndClick();
+        } else if (ImageOnScreen.isOnScreen(isResearching1) && ImageOnScreen.isOnScreen(fragmentAkademii)){
+            System.out.println("badania się wykonują");
+            mouse.closeAcademyScreen();
+        }
+        else {
+            System.out.println("nie widać ekranu akademii, nie robimy nic");
+        }
 //        System.out.println("usypiamy wątek BADANIA ARMIA na 5 minut na czas wykonywania BADAŃ");
 //        Thread.sleep(300000);
         botInterface.isMakingOrders = false;

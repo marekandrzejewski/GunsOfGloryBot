@@ -5,7 +5,7 @@ import java.awt.event.InputEvent;
 
 public class ScreenMovements {
     Robot robot = new Robot();
-    MouseActions mouse = new MouseActions();
+
 
     public ScreenMovements() throws AWTException {
     }
@@ -47,7 +47,7 @@ public class ScreenMovements {
 
     }
     public void dragAndDropDownLeftMenu(){
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             robot.mouseMove(100,367);
             robot.delay(2000);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -59,5 +59,19 @@ public class ScreenMovements {
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         }
 
+    }
+
+    public void dragAndDropUpLeftMenu() {
+        for (int i = 0; i < 3; i++) {
+            robot.mouseMove(90, 524);
+            robot.delay(2000);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.delay(500);
+            robot.mouseMove(100, 367);
+            robot.delay(2000);
+            robot.mouseMove(90, 524);
+            robot.delay(3000);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        }
     }
 }

@@ -4,6 +4,7 @@ import GunsOfGloryBot.BotInterface;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.DoctorGift;
 import GunsOfGloryBot.service.MouseActions;
+import GunsOfGloryBot.service.ScreenMovements;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +15,8 @@ public class TrainArmy extends Thread{
     int second = 0;
     int minute = 0;
     int hour = 0;
-    BotInterface botInterface;
-    ResearchInitialize researchInitialize;
+    ScreenMovements screenMovements = new ScreenMovements();
+    ResearchInitialize researchInitialize = new ResearchInitialize();
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -47,24 +48,25 @@ public class TrainArmy extends Thread{
     }
 
     public void armyTrain() throws AWTException, InterruptedException {
-
+        BotInterface botInterface = new BotInterface();
         System.out.println("wykonujemy rozkaz TRENUJ ARMIĘ, minęło 55 minut");
         botInterface.isMakingOrders = true;
         researchInitialize.setSecond(researchInitialize.getSecond() - 60);
+
 
         doctorGift.getDoctorGiftInCase();
         //barracks
         mouse.goToBarracks();
         clickTrainAndReturn();
-
+        doctorGift.getDoctorGiftInCase();
         // stables
         mouse.gotoStables();
         clickTrainAndReturn();
-
+        doctorGift.getDoctorGiftInCase();
         // artillery
           mouse.gotoArtillery();
        clickTrainAndReturn();
-
+        doctorGift.getDoctorGiftInCase();
         // shooters
          mouse.gotoShooters();
         clickTrainAndReturn();

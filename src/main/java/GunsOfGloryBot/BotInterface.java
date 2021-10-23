@@ -45,11 +45,11 @@ public class BotInterface {
                 Thread.sleep(1000);
                 System.out.println();
 
-                if ((orderResearch.getSecond() >= 300 && !isMakingOrders && !isResearching)) { // 5 min
-                    orderResearch.researchDevelop();
+                if ((orderResearch.getSecond() >= 30 && !isMakingOrders && !isResearching)) { // 5 min
+                    orderResearch.researchArmy();
                     isResearching = false;
                 }
-                if (orderTrainArmy.getSecond() >= 3300 && !isMakingOrders) { // 55 min
+                if (orderTrainArmy.getSecond() >= 3300 && !isMakingOrders) { // 55 min 3300 sek
                     orderTrainArmy.armyTrain();
                 }
             }
