@@ -14,6 +14,9 @@ public class ResearchInitialize extends Thread{
     //TODO sprawdź czy przy próbie zamknięcia po nieznalezieniu napisu badaj kursor nie  trafi w szare badanie
     //TODO zwiększ dynamikę badań sprawdzając czy po kliknięciu akademia/badania nie wykonuje się już badanie. I zamknij
     int second = 0;
+    PickPointAndClick pickPointAndClick = new PickPointAndClick();
+    Research research = new Research();
+    MouseActions mouse = new MouseActions();
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -38,15 +41,10 @@ public class ResearchInitialize extends Thread{
         return this;
     }
 
-    MouseActions mouse = new MouseActions();
-    PickPointAndClick pickPointAndClick = new PickPointAndClick();
-    Research research = new Research();
 
 
 
-
-
-    public void researchGeneral() throws InterruptedException, AWTException {
+    public void researchGeneral() throws AWTException {
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
         System.out.println("wykonujemy badanie General, minęło 900 sekund");
@@ -54,6 +52,7 @@ public class ResearchInitialize extends Thread{
         trainArmy.setSecond(trainArmy.getSecond() - 60);
 
         research.goToAcademyAndResearch();
+
 
         //repeatable, now to general
          research.pickGeneralCategory();
@@ -64,7 +63,7 @@ public class ResearchInitialize extends Thread{
         //System.out.println("usypiamy wątek BADANIA GENERAL na 5 minut na czas wykonywania BADAŃ");
        // Thread.sleep(300000); usypianie w tym przypadku niepotrzebne
         botInterface.isMakingOrders = false;
-        System.out.println("wybudzamy wątek BADAŃ");
+        System.out.println("wykonano rozkaz BADANIA GENERAL");
         setSecond(0);
     }
 
@@ -77,19 +76,20 @@ public class ResearchInitialize extends Thread{
 
         research.goToAcademyAndResearch();
 
+
         //repeatable, now to general
         research.pickDevelopCategory();
 
         //pick a point and click
         pickPointAndClick.pickTopAndClick();
 
-        System.out.println("usypiamy wątek BADANIA DEVELOP na 5 minut na czas wykonywania BADAŃ");
-        Thread.sleep(300000);
+//        System.out.println("usypiamy wątek BADANIA DEVELOP na 5 minut na czas wykonywania BADAŃ");
+//        Thread.sleep(300000);
         botInterface.isMakingOrders = false;
-        System.out.println("wybudzamy wątek BADAŃ");
+        System.out.println("wykonano rozkaz BADANIA DEVELOP");
         setSecond(0);
     }
-    public void researchArmy() throws InterruptedException, AWTException {
+    public void researchArmy() throws AWTException {
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
         System.out.println("wykonujemy badanie ARMIA, minęło 900 sekund");
@@ -104,10 +104,10 @@ public class ResearchInitialize extends Thread{
         //pick a point and click
         pickPointAndClick.pickTopAndClick();
 
-        System.out.println("usypiamy wątek BADANIA ARMIA na 5 minut na czas wykonywania BADAŃ");
-        Thread.sleep(300000);
+//        System.out.println("usypiamy wątek BADANIA ARMIA na 5 minut na czas wykonywania BADAŃ");
+//        Thread.sleep(300000);
         botInterface.isMakingOrders = false;
-        System.out.println("wybudzamy wątek BADAŃ");
+        System.out.println("wykonano rozkaz BADANIA ARMIA");
         setSecond(0);
     }
 }

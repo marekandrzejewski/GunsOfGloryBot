@@ -70,11 +70,10 @@ public class TrainArmy extends Thread{
         clickTrainAndReturn();
 
         robot.delay(5000);
-        //TODO prawdopodobnie usypianie też w tym przypadku będzie niepotrzebne, nie tylko w przypadku badań bo mamy cofnięcie timerów
-        System.out.println("usypiamy wątek TRENUJ ARMIE na 3 minuty na czas wykonywania rozkazu TRENUJ ARMIE");
-        Thread.sleep(180000); // 3 minuty
+//        System.out.println("usypiamy wątek TRENUJ ARMIE na 3 minuty na czas wykonywania rozkazu TRENUJ ARMIE");
+//        Thread.sleep(180000); // 3 minuty
         botInterface.isMakingOrders = false;
-        System.out.println("wybudzamy wątek TRENUJ ARMIE");
+        System.out.println("wykonano rozkaz TRENUJ ARMIĘ");
         setSecond(0);
     }
     public void clickTrainAndReturn(){

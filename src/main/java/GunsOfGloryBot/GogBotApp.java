@@ -28,6 +28,7 @@ public class GogBotApp {
         AttackMonsters test5 = new AttackMonsters();
         MouseActions mouse = new MouseActions();
         botInterface.trainingInProgressTest();
+        //botInterface.getExampleCoords();
         Farm test6 = new Farm();
         ArmyUpgrader test7 = new ArmyUpgrader();
 

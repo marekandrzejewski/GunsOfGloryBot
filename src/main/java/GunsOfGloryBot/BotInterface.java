@@ -9,16 +9,16 @@ import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.*;
 
 import java.awt.*;
-import java.sql.PseudoColumnUsage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
 
 
 public class BotInterface {
     public boolean isMakingOrders = false;
+    public boolean isResearching = false;
     ResearchInitialize orderResearch = new ResearchInitialize();
+    ImageSearch imageSearch = new ImageSearch();
     TrainArmy orderTrainArmy = new TrainArmy();
+    Robot robot = new Robot();
     TentMaker orderTentMake = new TentMaker();
     Farm orderFarmer = new Farm();
     AttackMonsters orderAttackMonsters = new AttackMonsters();
@@ -45,8 +45,9 @@ public class BotInterface {
                 Thread.sleep(1000);
                 System.out.println();
 
-                if (orderResearch.getSecond() >= 900 && !isMakingOrders) { // 15 min
+                if ((orderResearch.getSecond() >= 300 && !isMakingOrders && !isResearching)) { // 5 min
                     orderResearch.researchDevelop();
+                    isResearching = false;
                 }
                 if (orderTrainArmy.getSecond() >= 3300 && !isMakingOrders) { // 55 min
                     orderTrainArmy.armyTrain();
@@ -56,14 +57,11 @@ public class BotInterface {
 
 
     String trainingInProgress = "C:\\Users\\Admin\\Desktop\\goggraphics\\trainingInProgress.png";
-
-    public void showTime(){
-
-    }
+    String isResearching3 = "C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching3.png";
 
     public void trainingInProgressTest(){
         System.out.println("metoda isonscreen");
-        System.out.println(ImageOnScreen.isOnScreen(trainingInProgress));
+        System.out.println(ImageOnScreen.isOnScreen(isResearching3));
     }
 
     public static void barracksCoords(){
@@ -71,17 +69,17 @@ public class BotInterface {
        // System.out.println(Arrays.toString(ImageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\eloo.png")));
     }
 
-    public void getBarracksCoords(){
+    public void getExampleCoords(){
         System.out.println("wywołujemy współrzędne dla baraków");
-//        CoordData coordData = new CoordData(
-//
-//                (ImageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\barracksnapis2.png"))[0],
-//                (ImageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\barracksnapis2.png"))[1]
-//
-//                );
-//
-//        System.out.println(coordData.getCoordX());
-//        System.out.println(coordData.getCoordY());
+        CoordData coordData = new CoordData(
+
+                (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching3.png"))[0],
+                (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching3.png"))[1]
+
+                );
+
+        System.out.println(coordData.getCoordX());
+        System.out.println(coordData.getCoordY());
     }
 
 }

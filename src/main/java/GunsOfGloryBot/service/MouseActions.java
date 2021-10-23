@@ -68,6 +68,13 @@ public class MouseActions {
         click();
         robot.delay(2000);
     }
+    public void closeAcademyScreen(){
+        robot.delay(2500);
+        robot.mouseMove(433,274);
+        robot.delay(2500);
+        click();
+        robot.delay(2500);
+    }
     public void goToKingdomOrReturnCity(){
         robot.delay(2000);
         robot.mouseMove(429,571);
