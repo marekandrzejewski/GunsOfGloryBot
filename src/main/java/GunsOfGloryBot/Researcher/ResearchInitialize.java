@@ -2,6 +2,9 @@ package GunsOfGloryBot.Researcher;
 
 import GunsOfGloryBot.ArmyTrainer.TrainArmy;
 import GunsOfGloryBot.BotInterface;
+import GunsOfGloryBot.CityBuilder.TentMaker;
+import GunsOfGloryBot.Farmer.Farm;
+import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
 import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
 
@@ -50,10 +53,16 @@ public class ResearchInitialize extends Thread{
     public void researchGeneral() throws AWTException {
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
+        TentMaker tentMaker = new TentMaker();
+        Farm farm = new Farm();
+        AttackMonsters attackMonsters = new AttackMonsters();
+
         System.out.println("wykonujemy badanie General, minęło 900 sekund");
         botInterface.isMakingOrders = true;
         trainArmy.setSecond(trainArmy.getSecond() - 60);
-
+        tentMaker.setSecond(tentMaker.getSecond() - 60);
+        farm.setSecond(farm.getSecond() - 60);
+        attackMonsters.setSecond(attackMonsters.getSecond() - 60);
         research.goToAcademyAndResearch();
 
 
@@ -76,6 +85,10 @@ public class ResearchInitialize extends Thread{
         System.out.println("wykonujemy badanie Develop, minęło 300 sekund");
         botInterface.isMakingOrders = true;
         trainArmy.setSecond(trainArmy.getSecond() - 60);
+
+        if (ImageOnScreen.isOnScreen(botInterface.mapa)){
+            mouse.goToKingdomOrReturnCity();            // if we are out of city
+        }
 
         research.goToAcademyAndResearch();
 

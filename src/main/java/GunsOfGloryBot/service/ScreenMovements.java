@@ -52,7 +52,7 @@ public class ScreenMovements {
             robot.delay(2000);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.delay(500);
-            robot.mouseMove(90, 524);
+            robot.mouseMove(100, 524);
             robot.delay(2000);
             robot.mouseMove(100, 367);
             robot.delay(3000);

@@ -1,8 +1,12 @@
 package GunsOfGloryBot.ArmyTrainer;
 
 import GunsOfGloryBot.BotInterface;
+import GunsOfGloryBot.CityBuilder.TentMaker;
+import GunsOfGloryBot.Farmer.Farm;
+import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.DoctorGift;
+import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
 import GunsOfGloryBot.service.ScreenMovements;
 
@@ -13,8 +17,7 @@ import java.awt.event.ActionListener;
 
 public class TrainArmy extends Thread{
     int second = 0;
-    int minute = 0;
-    int hour = 0;
+
     ScreenMovements screenMovements = new ScreenMovements();
     ResearchInitialize researchInitialize = new ResearchInitialize();
     Timer timer = new Timer(1000, new ActionListener() {
@@ -49,10 +52,19 @@ public class TrainArmy extends Thread{
 
     public void armyTrain() throws AWTException, InterruptedException {
         BotInterface botInterface = new BotInterface();
+        TentMaker tentMaker = new TentMaker();
+        Farm farm = new Farm();
+        AttackMonsters attackMonsters = new AttackMonsters();
         System.out.println("wykonujemy rozkaz TRENUJ ARMIĘ, minęło 55 minut");
         botInterface.isMakingOrders = true;
         researchInitialize.setSecond(researchInitialize.getSecond() - 60);
+        tentMaker.setSecond(tentMaker.getSecond() - 60);
+        farm.setSecond(farm.getSecond() - 60);
+        attackMonsters.setSecond(attackMonsters.getSecond() - 60);
 
+        if (ImageOnScreen.isOnScreen(botInterface.mapa)){
+            mouse.goToKingdomOrReturnCity();            // if we are out of city
+        }
 
         doctorGift.getDoctorGiftInCase();
         //barracks

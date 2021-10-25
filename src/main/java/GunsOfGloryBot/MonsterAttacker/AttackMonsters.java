@@ -1,24 +1,70 @@
 package GunsOfGloryBot.MonsterAttacker;
 
+import GunsOfGloryBot.ArmyTrainer.TrainArmy;
+import GunsOfGloryBot.BotInterface;
+import GunsOfGloryBot.CityBuilder.TentMaker;
+import GunsOfGloryBot.Farmer.Farm;
+import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.server.RemoteServer;
 
-public class AttackMonsters {
+public class AttackMonsters extends Thread{
 
     //TODO GOTOWE ALE ZROBIONE NA 1 SLOT MARSZU, ZRÓB NA WIĘCEJ
     Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
     String invalidMonsterLevel = "C:\\Users\\Admin\\Desktop\\goggraphics\\invalidmonsterlevel.png";
-
+    Timer timer = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            second++;
+        }
+    });
+    int second = 0;
 
     public AttackMonsters() throws AWTException {
     }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public AttackMonsters setSecond(int second) {
+        this.second = second;
+        return this;
+    }
+
+    @Override
+    public void run() {
+        timer.start();
+    }
+
     public boolean isLevelInvalid(){
         return ImageOnScreen.isOnScreen(invalidMonsterLevel);
     }
-    public void huntMonstersInitializer(int level){
+    public void huntMonstersInitializer(int level) throws AWTException {
+        ResearchInitialize researchInitialize = new ResearchInitialize();
+        BotInterface botInterface = new BotInterface();
+        TentMaker tentMaker = new TentMaker();
+        Farm farm = new Farm();
+        TrainArmy trainArmy = new TrainArmy();
+        System.out.println("wykonujemy rozkaz ATAKUJ MOBKI, minęło 55 minut");
+        botInterface.isMakingOrders = true;
+        researchInitialize.setSecond(researchInitialize.getSecond() - 120);
+        tentMaker.setSecond(tentMaker.getSecond() - 120);
+        farm.setSecond(farm.getSecond() - 120);
+        trainArmy.setSecond(trainArmy.getSecond() - 120);
+
+        if (!ImageOnScreen.isOnScreen(botInterface.mapa)){
+            mouse.goToKingdomOrReturnCity();
+        }
+
         mouse.goToSearch();
         robot.mouseMove(80,557); // click threats
         robot.delay(2000);
@@ -26,6 +72,10 @@ public class AttackMonsters {
         robot.delay(2000);
         setMonsterLevelAndSearchIt(level);
         attackMonsters();
+
+        botInterface.isMakingOrders = false;
+        System.out.println("wykonano rozkaz ATAKUJ MOBKI");
+        setSecond(0);
     }
     public void attackMonsters(){
         robot.mouseMove(223,426); //click middle screen on monster

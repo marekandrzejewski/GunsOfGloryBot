@@ -1,11 +1,14 @@
 package GunsOfGloryBot.Farmer;
 
-import GunsOfGloryBot.service.CoordData;
+
 import GunsOfGloryBot.service.ImageOnScreen;
-import GunsOfGloryBot.service.ImageSearch;
+
 import GunsOfGloryBot.service.MouseActions;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FarmFood {
     Robot robot = new Robot();
