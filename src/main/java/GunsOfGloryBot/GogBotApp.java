@@ -1,12 +1,15 @@
 package GunsOfGloryBot;
 
+import GunsOfGloryBot.AllianceDonation.Donation;
 import GunsOfGloryBot.ArmyTrainer.ArmyUpgrader;
 import GunsOfGloryBot.ArmyTrainer.TrainArmy;
+import GunsOfGloryBot.CityBuilder.CastleUpgrader;
 import GunsOfGloryBot.CityBuilder.TentMaker;
 import GunsOfGloryBot.Farmer.Farm;
-import GunsOfGloryBot.Farmer.FarmFood;
 import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
+import GunsOfGloryBot.Researcher.Research;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
+import GunsOfGloryBot.service.BuildingService;
 import GunsOfGloryBot.service.MouseActions;
 import GunsOfGloryBot.service.ScreenMovements;
 
@@ -31,28 +34,17 @@ public class GogBotApp {
         //botInterface.getExampleCoords();
         Farm test6 = new Farm();
         ArmyUpgrader test7 = new ArmyUpgrader();
-
-
-        botInterface.appRun(); // GOGOGOGO KURWA
-
-       // test.armyTrain();            // GOTOWE
-
-
-
-
-
-//    mouse.goToKingdomOrReturnCity();
-//    test5.huntMonstersInitializer(3);
-//    mouse.goToKingdomOrReturnCity();
-//        test2.researchGeneral();
-//        test2.researchDevelop();              //GOTOWE
-        //test2.researchArmy();
-
-//while (true){
-//  test4.tentMakerInitialize(); //GOTOWE, ALE WYKRYWANIE OBRAZKA ISBUILDING SIĘ PSUŁO
-//}
-
-
+        Research test8 = new Research();
+        BuildingService test9 = new BuildingService();
+        CastleUpgrader test10 = new CastleUpgrader();
+        test10.UpgradeCastleInit();
+        Donation test11 = new Donation();
+        // test11.donationInit();
+        /*System.out.println(        test11.is2ndDonationNotAvaiable()
+        );
+        System.out.println(        test11.is3rdDonationNotAvaiable()
+        );*/
+        //botInterface.appRun(); // GOGOGOGO KURWA
 
     }
 }

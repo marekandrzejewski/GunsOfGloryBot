@@ -14,7 +14,13 @@ public class MouseActions {
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
-
+    public void moveToPointAndClick(int x, int y){
+        robot.delay(2000);
+        robot.mouseMove(x,y);
+        robot.delay(2000);
+        click();
+        robot.delay(2000);
+    }
     public void goToBarracks(){
         robot.delay(2000);
         robot.mouseMove(6,436);
