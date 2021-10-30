@@ -22,7 +22,8 @@ public class AttackMonsters extends Thread{
     Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
     Strings strings = new Strings();
-    Timer timer = new Timer(1000, new ActionListener() {
+    public static int i;
+    public Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             second++;
@@ -56,38 +57,39 @@ public class AttackMonsters extends Thread{
         TrainArmy trainArmy = new TrainArmy();
         System.out.println("wykonujemy rozkaz ATAKUJ MOBKI, minęło 55 minut");
         botInterface.isMakingOrders = true;
-        //researchInitialize.setSecond(researchInitialize.getSecond() - 600);
-        researchInitialize.timer.setDelay(1800000);
-        //tentMaker.setSecond(tentMaker.getSecond() - 600);
-        //farm.setSecond(farm.getSecond() - 600);
-        farm.timer.setDelay(1800000);
-        //trainArmy.setSecond(trainArmy.getSecond() - 600);
-        trainArmy.timer.setDelay(1800000);
+        researchInitialize.setSecond(researchInitialize.getSecond() - 300);
+        tentMaker.setSecond(tentMaker.getSecond() - 300);
+        farm.setSecond(farm.getSecond() - 300);
+        trainArmy.setSecond(trainArmy.getSecond() - 300);
+        strings.checkIfAdIsVisibleAndCloseIt();
 
-        if (!ImageOnScreen.isOnScreen(Strings.mapa) && ImageOnScreen.isOnScreen(strings.chickInCity)){
-            mouse.goToKingdomOrReturnCity();
+        for (i = 0; i < 2; i ++) {
+            if (strings.isArmyMarching()) {
+                System.out.println("armia maszeruje, obniżamy licznik o 1");
+                i--;
+            } else {
+                mouse.goToSearch();
+                mouse.moveToPointAndClick(FarmFood.foodXpoint - 240, FarmFood.foodYpoint);
+                setMonsterLevelAndSearchIt(level);
+                attackMonsters();
+
+                botInterface.isMakingOrders = false;
+                System.out.println("wykonano rozkaz ATAKUJ MOBKI");
+                setSecond(0);
+            }
         }
-
-        mouse.goToSearch();
-        mouse.moveToPointAndClick(FarmFood.foodXpoint - 240, FarmFood.foodYpoint);
-        setMonsterLevelAndSearchIt(level);
-        attackMonsters();
-
-        botInterface.isMakingOrders = false;
-        System.out.println("wykonano rozkaz ATAKUJ MOBKI");
-        setSecond(0);
     }
-    public void attackMonsters() throws AWTException {
 
+    public void attackMonsters() throws AWTException {
         if (strings.isLevelInvalid()){
             lowerLevelByOneAndTryAgain();
         } else {
             mouse.moveToPointAndClick(677,375);  //click middle screen on monster
             //strings.checkIfAttackableAndClickAttack();
             mouse.moveToPointAndClick(1102,496);
+
             strings.checkIfMarchAvaiableAndClick();
         }
-
     }
     public void setMonsterLevelAndSearchIt(int level){
         robot.delay(2000);

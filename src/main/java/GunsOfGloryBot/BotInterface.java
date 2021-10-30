@@ -23,6 +23,7 @@ public class BotInterface {
     AttackMonsters orderAttackMonsters = new AttackMonsters();
     ArmyUpgrader orderArmyUpgrade = new ArmyUpgrader();
     Strings strings = new Strings();
+    MouseActions mouse = new MouseActions();
 
 
     public BotInterface() throws AWTException {
@@ -57,36 +58,33 @@ public class BotInterface {
                 Thread.sleep(1000);
                 System.out.println();
 
-                if ((orderResearch.getSecond() >= 100 && !isMakingOrders && !isResearching)) { // wprowadź czas
+                if ((orderResearch.getSecond() >= 1000000 && !isMakingOrders && !isResearching)) { // wprowadź czas
                     orderResearch.researchArmy();
                     isResearching = false;
+                    strings.checkIfAdIsVisibleAndCloseIt();
                 }
-                if (orderTrainArmy.getSecond() >= 165 && !isMakingOrders) { // 55 min 3300 sek
+                if (orderTrainArmy.getSecond() >= 2342 && !isMakingOrders) { // 39 min 2 sek 2342
+                    orderTrainArmy.armyMontage();
                     orderTrainArmy.armyTrain();
                 }
                 if (orderTentMake.getSecond() >= 9999999  && !isMakingOrders) { // PRZYKŁADOWO GODZINA, POPRAW
-                    orderTentMake.tentMakerInitialize();
+                    //orderTentMake.tentMakerInitialize();
                 }
                 if (orderFarmer.getSecond() >= 30 && !isMakingOrders) { // 55 min 3300 sek
 //                    orderFarmer.farmFood();
 //                    Thread.sleep(5000);
 //                    orderFarmer.farmWood();
                 }
-                if (orderAttackMonsters.getSecond() >= 45  && !isMakingOrders) { // 55 min 3300 sek
-                    for (int i = 0; i < 20; i ++){
-                        if (strings.isArmyMarching()){
-                            System.out.println("armia maszeruje, obniżamy licznik o 1");
-                            i--;
-                        }
-                        else{
-                            orderAttackMonsters.huntMonstersInitializer(1);
-                            System.out.println("zabito jednego mobka");
-                        }
-
+                if (orderAttackMonsters.getSecond() >= 10  && !isMakingOrders) { // 55 min 3300 sek
+                    strings.checkIfAdIsVisibleAndCloseIt();
+                    if (!ImageOnScreen.isOnScreen(Strings.mapa) && ImageOnScreen.isOnScreen(strings.chickInCity)) {
+                        mouse.goToKingdomOrReturnCity();
+                    }
+                    orderAttackMonsters.huntMonstersInitializer(1);
+                    System.out.println("zabito jednego mobka");
                     }
                 }
             }
-        }
 
 
     String trainingInProgress = "C:\\Users\\Admin\\Desktop\\goggraphics\\trainingInProgress.png";

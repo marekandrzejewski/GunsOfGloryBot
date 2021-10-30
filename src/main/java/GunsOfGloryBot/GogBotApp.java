@@ -42,7 +42,6 @@ public class GogBotApp {
         //test10.UpgradeCastleInit();
         //test0.previewOfLowerCityBuildings();
         Donation test12 = new Donation();
-
         /*System.out.println(        test11.is2ndDonationNotAvaiable()
         );
         System.out.println(        test11.is3rdDonationNotAvaiable()

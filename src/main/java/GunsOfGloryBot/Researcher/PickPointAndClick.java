@@ -22,11 +22,13 @@ public class PickPointAndClick {
     // BOTTOM FIRST 300, 435
 
     public void initializeResearch(){
-        CoordData coordData = new CoordData(
-                (imageSearch.imageLocation(strings.researching))[0],
-                (imageSearch.imageLocation(strings.researching))[1]
-        );
-        mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+        if (ImageOnScreen.isOnScreen(strings.researching)){
+            CoordData coordData = new CoordData(
+                    (imageSearch.imageLocation(strings.researching))[0],
+                    (imageSearch.imageLocation(strings.researching))[1]
+            );
+            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+        }
         mouse.closeAcademyScreen();
     }
 
@@ -37,15 +39,17 @@ public class PickPointAndClick {
         }
         mouse.moveToPointAndClick(baseX,baseY);//top
 
-        if (strings.checkIfResearchAvaiable() || accidentCounter > 20){
+        if (strings.checkIfResearchAvaiable()){
             baseX = 300;
             accidentCounter = 0;
            initializeResearch();
            isInitialized = true;
            //order list. next order
+        } else if (accidentCounter > 20){
+            mouse.closeAcademyScreen();
         }
         else {
-            mouse.closeResearchInnerScreen();
+            strings.ifResearchingNotVisibleCloseAndMoveNext();
             accidentCounter++;
             pickMiddleAndClick();
         }
@@ -61,8 +65,11 @@ public class PickPointAndClick {
             isInitialized = true;
 
         }
+        else if (accidentCounter > 20){
+mouse.closeAcademyScreen();
+        }
         else {
-            mouse.closeResearchInnerScreen();
+            strings.ifResearchingNotVisibleCloseAndMoveNext();
             accidentCounter++;
             pickBottomAndClick();
         }
@@ -78,10 +85,12 @@ public class PickPointAndClick {
             accidentCounter = 0;
             initializeResearch();
             isInitialized = true;
+        }else if (accidentCounter > 20){
+            mouse.closeAcademyScreen();
         }
         else {
             baseX = baseX + 170;
-            mouse.closeResearchInnerScreen();
+            strings.ifResearchingNotVisibleCloseAndMoveNext();
             accidentCounter++;
             pickTopAndClick();
         }

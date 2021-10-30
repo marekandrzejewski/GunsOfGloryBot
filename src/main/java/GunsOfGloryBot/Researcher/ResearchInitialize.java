@@ -111,14 +111,21 @@ public class ResearchInitialize extends Thread{
         System.out.println("wykonano rozkaz BADANIA DEVELOP");
         setSecond(0);
     }
-    public void researchArmy() throws AWTException {
+    public void researchArmy() throws AWTException, InterruptedException {
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
+        AttackMonsters attackMonsters = new AttackMonsters();
         System.out.println("wykonujemy badanie ARMIA, minęło 900 sekund");
         botInterface.isMakingOrders = true;
         trainArmy.setSecond(trainArmy.getSecond() - 60);
-
+        attackMonsters.setSecond(attackMonsters.getSecond() - 60);
+        if (ImageOnScreen.isOnScreen(Strings.mapa)){
+            mouse.goToKingdomOrReturnCity();            // if we are out of city
+        }
+        strings.checkIfCloseXisAvaiableAndClick();
         research.goToAcademyAndResearch();
+
+        Thread.sleep(3000);
 
         if (strings.ifResearchInAcademyIsInProgress()){
             System.out.println("nie ma badań, wykonujemy rozkaz BADANIA");
@@ -129,10 +136,15 @@ public class ResearchInitialize extends Thread{
             pickPointAndClick.pickTopAndClick();
         }
         else {
+            strings.checkIfAcademyIsBuildingWhileTryToResearch();
+            strings.checkIfCloseXisAvaiableAndClick();
             System.out.println("nie widać ekranu akademii, nie robimy nic");
+            trainArmy.setSecond(trainArmy.getSecond() + 20);
+            attackMonsters.setSecond(attackMonsters.getSecond() + 20);
         }
         botInterface.isMakingOrders = false;
         System.out.println("wykonano rozkaz BADANIA ARMIA");
         setSecond(0);
+        //TODO ZRÓB 987/304 PRZYCISK HELP FROM ALLY
     }
 }

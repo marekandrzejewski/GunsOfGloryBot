@@ -100,6 +100,40 @@ public class ScreenMovements {
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         robot.delay(2000);
     }
+    public void previewOfUpperCityBuildings(){
+        for (int i = 0; i < 5; i++) {
+            robot.delay(2000);
+            robot.mouseMove(1110, 530);
+            robot.delay(3000);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.delay(500);
+            robot.mouseMove(364, 153);
+            robot.delay(2000);
+            robot.mouseMove(1110, 530);
+            robot.delay(3000);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            robot.delay(2000);
+        }
+        robot.mouseMove(300, 600);
+        robot.delay(3000);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.delay(500);
+        robot.mouseMove(1159, 600);
+        robot.delay(2000);
+        robot.mouseMove(300, 600);
+        robot.delay(3000);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+        robot.mouseMove(644, 314);
+        robot.delay(3000);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.delay(500);
+        robot.mouseMove(776, 539);
+        robot.delay(2000);
+        robot.mouseMove(644, 314);
+        robot.delay(3000);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    }
     public void dragAndDropUpLeftMenu(){
         for (int i = 0; i < 3; i++) {
             robot.mouseMove(413, 581);

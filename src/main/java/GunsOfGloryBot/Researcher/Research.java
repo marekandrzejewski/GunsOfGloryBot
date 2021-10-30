@@ -7,6 +7,7 @@ import java.awt.*;
 public class Research {
     MouseActions mouse = new MouseActions();
     ScreenMovements screenMovements = new ScreenMovements();
+    Strings strings = new Strings();
 
     public Research() throws AWTException {
     }
@@ -15,8 +16,10 @@ public class Research {
         if (ImageOnScreen.isOnScreen(Strings.mapa)){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
-     screenMovements.previewOfLowerCityBuildings();
-     toTheAcademyAndClickResearch();
+        if (!strings.checkIfAcademyIsVisibleOnScreen()) {
+            screenMovements.previewOfLowerCityBuildings();
+        } else toTheAcademyAndClickResearch();
+        toTheAcademyAndClickResearch();
     }
 
     private void toTheAcademyAndClickResearch() {

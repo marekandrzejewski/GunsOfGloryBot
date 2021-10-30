@@ -54,11 +54,10 @@ public class TrainArmy extends Thread{
         AttackMonsters attackMonsters = new AttackMonsters();
         System.out.println("wykonujemy rozkaz TRENUJ ARMIĘ, minęło 55 minut");
         botInterface.isMakingOrders = true;
-        researchInitialize.setSecond(researchInitialize.getSecond() - 60);
         tentMaker.setSecond(tentMaker.getSecond() - 60);
         farm.setSecond(farm.getSecond() - 60);
         attackMonsters.setSecond(attackMonsters.getSecond() - 60);
-
+        researchInitialize.setSecond(researchInitialize.getSecond() - 60);
         if (ImageOnScreen.isOnScreen(Strings.mapa)){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
@@ -98,4 +97,11 @@ public class TrainArmy extends Thread{
         //without option constant training, screen returns to city
     }
 
+    public void armyMontage() {
+        screenMovements.previewOfUpperCityBuildings();
+        mouse.moveToPointAndClick(652,228);
+        mouse.moveToPointAndClick(759,289);
+        mouse.moveToPointAndClick(858,400);
+        mouse.moveToPointAndClick(811,511);
+    }
 }
