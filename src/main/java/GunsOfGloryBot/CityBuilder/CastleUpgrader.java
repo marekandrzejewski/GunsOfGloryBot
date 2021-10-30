@@ -24,7 +24,7 @@ public class CastleUpgrader { // upgrades either castle or components, function 
         moveALittleUp();
 
         mouse.moveToPointAndClick(256,345); //click castle
-        mouse.moveToPointAndClick(220,368); //click upgrade
+        mouse.moveToPointAndClick(193,351); //click upgrade
         buildingService.build();
     }
 

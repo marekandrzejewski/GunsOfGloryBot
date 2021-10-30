@@ -22,6 +22,7 @@ public class BotInterface {
     Farm orderFarmer = new Farm();
     AttackMonsters orderAttackMonsters = new AttackMonsters();
     ArmyUpgrader orderArmyUpgrade = new ArmyUpgrader();
+    Strings strings = new Strings();
 
 
     public BotInterface() throws AWTException {
@@ -56,32 +57,43 @@ public class BotInterface {
                 Thread.sleep(1000);
                 System.out.println();
 
-                if ((orderResearch.getSecond() >= 999999 && !isMakingOrders && !isResearching)) { // wprowadź czas
+                if ((orderResearch.getSecond() >= 100 && !isMakingOrders && !isResearching)) { // wprowadź czas
                     orderResearch.researchArmy();
                     isResearching = false;
                 }
-                if (orderTrainArmy.getSecond() >= 3300 && !isMakingOrders) { // 55 min 3300 sek
+                if (orderTrainArmy.getSecond() >= 165 && !isMakingOrders) { // 55 min 3300 sek
                     orderTrainArmy.armyTrain();
                 }
-                if (orderTentMake.getSecond() >= 3600  && !isMakingOrders) { // PRZYKŁADOWO GODZINA, POPRAW
+                if (orderTentMake.getSecond() >= 9999999  && !isMakingOrders) { // PRZYKŁADOWO GODZINA, POPRAW
                     orderTentMake.tentMakerInitialize();
                 }
-                if (orderFarmer.getSecond() >= 30  && !isMakingOrders) { // 55 min 3300 sek
-                    orderFarmer.farmFood();
+                if (orderFarmer.getSecond() >= 30 && !isMakingOrders) { // 55 min 3300 sek
+//                    orderFarmer.farmFood();
+//                    Thread.sleep(5000);
+//                    orderFarmer.farmWood();
                 }
-                if (orderAttackMonsters.getSecond() >= 40  && !isMakingOrders) { // 55 min 3300 sek
-                    orderAttackMonsters.huntMonstersInitializer(3);
+                if (orderAttackMonsters.getSecond() >= 45  && !isMakingOrders) { // 55 min 3300 sek
+                    for (int i = 0; i < 20; i ++){
+                        if (strings.isArmyMarching()){
+                            System.out.println("armia maszeruje, obniżamy licznik o 1");
+                            i--;
+                        }
+                        else{
+                            orderAttackMonsters.huntMonstersInitializer(1);
+                            System.out.println("zabito jednego mobka");
+                        }
+
+                    }
                 }
             }
         }
 
 
     String trainingInProgress = "C:\\Users\\Admin\\Desktop\\goggraphics\\trainingInProgress.png";
-    public String mapa = "C:\\Users\\Admin\\Desktop\\goggraphics\\mapa.png";
 
     public void trainingInProgressTest(){
         System.out.println("metoda isonscreen");
-        System.out.println(ImageOnScreen.isOnScreen(mapa));
+        System.out.println(ImageOnScreen.isOnScreen(Strings.mapa));
     }
 
     public static void barracksCoords(){
@@ -91,15 +103,19 @@ public class BotInterface {
 
     public void getExampleCoords(){
         System.out.println("wywołujemy współrzędne dla baraków");
-        CoordData coordData = new CoordData(
+        if (ImageOnScreen.isOnScreen(Strings.mapa)){
+            CoordData coordData = new CoordData(
 
-                (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching3.png"))[0],
-                (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\ifisresearching3.png"))[1]
+                    (imageSearch.imageLocation(Strings.mapa))[0],
+                    (imageSearch.imageLocation(Strings.mapa))[1]
 
-                );
+            );
 
-        System.out.println(coordData.getCoordX());
-        System.out.println(coordData.getCoordY());
+            System.out.println(coordData.getCoordX());
+            System.out.println(coordData.getCoordY());
+        }
+        else System.out.println("nie widać detalu");
+
     }
 
 }

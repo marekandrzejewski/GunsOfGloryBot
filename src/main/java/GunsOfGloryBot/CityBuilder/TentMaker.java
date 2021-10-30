@@ -8,6 +8,7 @@ import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
 import GunsOfGloryBot.service.ScreenMovements;
+import GunsOfGloryBot.service.Strings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +62,7 @@ public boolean isBuildable(){
         // TODO ADD 2 MORE TENTS LATER
     public void tentMakerInitialize() throws AWTException {
         BotInterface botInterface = new BotInterface();
-        if (ImageOnScreen.isOnScreen(botInterface.mapa)){
+        if (ImageOnScreen.isOnScreen(Strings.mapa)){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
         if (getSecond() > 3600){

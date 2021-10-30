@@ -7,6 +7,7 @@ import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.ImageOnScreen;
 import GunsOfGloryBot.service.MouseActions;
+import GunsOfGloryBot.service.Strings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class Farm extends Thread{
     FarmAlliance farmAlliance = new FarmAlliance();
     MouseActions mouse = new MouseActions();
 
-    Timer timer = new Timer(1000, new ActionListener() {
+    public Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             second++;
@@ -59,7 +60,7 @@ public class Farm extends Thread{
         attackMonsters.setSecond(attackMonsters.getSecond() - 120);
         researchInitialize.setSecond(researchInitialize.getSecond() - 120);
 
-        if (!ImageOnScreen.isOnScreen(botInterface.mapa)){
+        if (!ImageOnScreen.isOnScreen(Strings.mapa)){
             mouse.goToKingdomOrReturnCity();
         }
         mouse.goToSearch();
@@ -69,10 +70,28 @@ public class Farm extends Thread{
         System.out.println("wykonano rozkaz FARM ŻARCIE");
         setSecond(0);
     }
-    public void farmWood(){
-        mouse.goToKingdomOrReturnCity();
+    public void farmWood() throws AWTException {
+        BotInterface botInterface = new BotInterface();
+        TrainArmy trainArmy = new TrainArmy();
+        TentMaker tentMaker = new TentMaker();
+        AttackMonsters attackMonsters = new AttackMonsters();
+        ResearchInitialize researchInitialize = new ResearchInitialize();
+        System.out.println("wykonujemy ŻARCIE, minęło 120 sekund");
+        botInterface.isMakingOrders = true;
+        tentMaker.setSecond(tentMaker.getSecond() - 120);
+        trainArmy.setSecond(trainArmy.getSecond() - 120);
+        attackMonsters.setSecond(attackMonsters.getSecond() - 120);
+        researchInitialize.setSecond(researchInitialize.getSecond() - 120);
+
+        if (!ImageOnScreen.isOnScreen(Strings.mapa)){
+            mouse.goToKingdomOrReturnCity();
+        }
         mouse.goToSearch();
-        //farmWood.farmInit();
+        farmWood.woodInit();
+
+        botInterface.isMakingOrders = false;
+        System.out.println("wykonano rozkaz FARM DREWNO");
+        setSecond(0);
     }
     public void farmIron(){
         mouse.goToKingdomOrReturnCity();

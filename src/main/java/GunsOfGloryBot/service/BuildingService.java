@@ -54,10 +54,7 @@ public class BuildingService {
 
     public void checkIfBuildableAndBuild() {
         if (isBuildable()) {
-            robot.mouseMove(385, 528);
-            robot.delay(2000);
-            mouse.click();      //build
-            robot.delay(2000);
+            mouse.moveToPointAndClick(385,528);
         }
         else {
             checkIfComponentIsRequiredAndTryToBuildIt();

@@ -1,80 +1,54 @@
 package GunsOfGloryBot.Farmer;
 
 
-import GunsOfGloryBot.service.ImageOnScreen;
-
 import GunsOfGloryBot.service.MouseActions;
+import GunsOfGloryBot.service.Strings;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class FarmFood {
     Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
-    String invalidTileLevel = "C:\\Users\\Admin\\Desktop\\goggraphics\\invalidtilelevel.png";
-    int searchXpoint = 200;
-    int searchYpoint = 504;
+    Strings strings = new Strings();
+    public static int foodSearchXpoint = 628;
+    public static int foodSearchYpoint = 528;
+    public static int foodXpoint = 622;
+    public static int foodYpoint = 633;
+
 
     public FarmFood() throws AWTException {
     }
-    public boolean isTileInvalid(){
-        return ImageOnScreen.isOnScreen(invalidTileLevel);
-    }
-
-    public void farmInit() {
 
 
-
-        robot.delay(2000);
-        robot.mouseMove(193,559); //click Food
-        robot.delay(2000);
-        mouse.click();
-        robot.mouseMove(245,467); // click + to increase farm level
+    public void farmInit() throws AWTException {
+        mouse.moveToPointAndClick(foodXpoint,foodYpoint);
+        robot.mouseMove(721,458); // click + to increase farm level
         robot.delay(2000);
         for (int i = 0; i < 6; i++){
             mouse.click();
             robot.delay(2000);
         }
 
-        robot.mouseMove(searchXpoint, searchYpoint);
-        robot.delay(2000);
-        mouse.click(); // click search
+        mouse.moveToPointAndClick(foodSearchXpoint, foodSearchYpoint);
         condition();
     }
 
-    private void condition() {
-        if (isTileInvalid()){
+    private void condition() throws AWTException {
+        if (strings.isTileInvalid()){
             lowerFarmLevelAndTryAgain();
         }
         else{
-
-            robot.delay(2000);
-            robot.mouseMove(227, 430); // move to middle screen
-            robot.delay(2000);
-            mouse.click(); // click on tile
-            robot.delay(2000);
-            robot.mouseMove(300, 430); // move to occupy
-            robot.delay(2000);
-            mouse.click(); // click on occupy
-            robot.mouseMove(360,530);
-            robot.delay(2000);
-            mouse.click();//click march
-            robot.delay(2000);
-
+            mouse.moveToPointAndClick(680,378); // move to middle screen
+            mouse.moveToPointAndClick(778,376); // occupy
+            strings.checkIfMarchAvaiableAndClick();
+            if (Strings.marches == 0)
+            farmInit(); // try again once if not succeed
         }
     }
 
-    public void lowerFarmLevelAndTryAgain(){
-        robot.mouseMove(144,467); // move to - point
-        robot.delay(2000);
-        mouse.click(); // lower farm level by 1 and try again
-        robot.delay(2000);
-        robot.mouseMove(searchXpoint, searchYpoint);
-        robot.delay(2000);
-        mouse.click(); // click search
-        robot.delay(2000);
+    public void lowerFarmLevelAndTryAgain() throws AWTException {
+        mouse.moveToPointAndClick(525,455);
+        mouse.moveToPointAndClick(foodSearchXpoint,foodSearchYpoint);
         condition();
     }
 }

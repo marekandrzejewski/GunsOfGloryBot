@@ -1,56 +1,44 @@
 package GunsOfGloryBot.Researcher;
 
-import GunsOfGloryBot.service.ImageOnScreen;
-import GunsOfGloryBot.service.MouseActions;
-import GunsOfGloryBot.service.ScreenMovements;
+import GunsOfGloryBot.service.*;
 
 import java.awt.*;
 
 public class PickPointAndClick {
     boolean isInitialized = false;
-    Robot robot = new Robot();
+    Strings strings = new Strings();
+    ImageSearch imageSearch = new ImageSearch();
     ScreenMovements screenMovements = new ScreenMovements();
     MouseActions mouse = new MouseActions();
-    String researching = "C:\\Users\\Admin\\Desktop\\goggraphics\\researching.png";
 
-    //beginning from UP LEFT
-    int baseX = 23;
-    int baseY = 359;
+    int baseX = 300;
+    int baseY = 255;
     int accidentCounter = 0;
 
     public PickPointAndClick() throws AWTException {
     }
-            // TOP FIRST 23,359   x+90 to next
-            // MIDDLE FIRST 23, 423 y+64 to next
-            // BOTTOM FIRST 23, 487
+    // TOP FIRST 300,255   x+170 to next
+    // MIDDLE FIRST 300, 345 y+120 to next
+    // BOTTOM FIRST 300, 435
 
-    public boolean checkIfResearchAvaiable(){
-        return ImageOnScreen.isOnScreen(researching);
-    }
     public void initializeResearch(){
-        robot.mouseMove(335,507);
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2500);
-        robot.mouseMove(433,274);
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2500);
+        CoordData coordData = new CoordData(
+                (imageSearch.imageLocation(strings.researching))[0],
+                (imageSearch.imageLocation(strings.researching))[1]
+        );
+        mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+        mouse.closeAcademyScreen();
     }
 
     public void pickTopAndClick(){
-        if (baseX > 443) {
-            baseX = 23;
+        if (baseX > 1000) {
+            baseX = 300;
             screenMovements.academyMoveRight();
         }
+        mouse.moveToPointAndClick(baseX,baseY);//top
 
-                robot.delay(2500);
-                robot.mouseMove(baseX,baseY); //top
-                robot.delay(2500);
-                mouse.click();
-                robot.delay(2500);
-        if (checkIfResearchAvaiable() || accidentCounter > 20){
-            baseX = 23;
+        if (strings.checkIfResearchAvaiable() || accidentCounter > 20){
+            baseX = 300;
             accidentCounter = 0;
            initializeResearch();
            isInitialized = true;
@@ -65,13 +53,9 @@ public class PickPointAndClick {
     public void pickMiddleAndClick(){
 
         //pick a point and click
-        robot.delay(2500);
-        robot.mouseMove(baseX,baseY + 64); //middle
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2500);
-        if (checkIfResearchAvaiable()){
-            baseX = 23;
+        mouse.moveToPointAndClick(baseX,baseY + 120); // middle
+        if (strings.checkIfResearchAvaiable()){
+            baseX = 300;
             accidentCounter = 0;
             initializeResearch();
             isInitialized = true;
@@ -87,20 +71,16 @@ public class PickPointAndClick {
     public void pickBottomAndClick(){
 
         //pick a point and click
-        robot.delay(2500);
-        robot.mouseMove(baseX,baseY + 128); //bottom
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2500);
+        mouse.moveToPointAndClick(baseX, baseY + 120);
 
-        if (checkIfResearchAvaiable()){
-            baseX = 23;
+        if (strings.checkIfResearchAvaiable()){
+            baseX = 300;
             accidentCounter = 0;
             initializeResearch();
             isInitialized = true;
         }
         else {
-            baseX = baseX + 90;
+            baseX = baseX + 170;
             mouse.closeResearchInnerScreen();
             accidentCounter++;
             pickTopAndClick();

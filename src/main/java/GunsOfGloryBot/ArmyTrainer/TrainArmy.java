@@ -5,10 +5,7 @@ import GunsOfGloryBot.CityBuilder.TentMaker;
 import GunsOfGloryBot.Farmer.Farm;
 import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
-import GunsOfGloryBot.service.DoctorGift;
-import GunsOfGloryBot.service.ImageOnScreen;
-import GunsOfGloryBot.service.MouseActions;
-import GunsOfGloryBot.service.ScreenMovements;
+import GunsOfGloryBot.service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +17,7 @@ public class TrainArmy extends Thread{
 
     ScreenMovements screenMovements = new ScreenMovements();
     ResearchInitialize researchInitialize = new ResearchInitialize();
-    Timer timer = new Timer(1000, new ActionListener() {
+    public Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             second++;
@@ -46,7 +43,7 @@ public class TrainArmy extends Thread{
     Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
     DoctorGift doctorGift = new DoctorGift();
-
+    Strings strings = new Strings();
     public TrainArmy() throws AWTException {
     }
 
@@ -62,22 +59,26 @@ public class TrainArmy extends Thread{
         farm.setSecond(farm.getSecond() - 60);
         attackMonsters.setSecond(attackMonsters.getSecond() - 60);
 
-        if (ImageOnScreen.isOnScreen(botInterface.mapa)){
+        if (ImageOnScreen.isOnScreen(Strings.mapa)){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
 
+        doctorGift.getDoctorGiftInCase();
         doctorGift.getDoctorGiftInCase();
         //barracks
         mouse.goToBarracks();
         clickTrainAndReturn();
         doctorGift.getDoctorGiftInCase();
+        doctorGift.getDoctorGiftInCase();
         // stables
         mouse.gotoStables();
         clickTrainAndReturn();
         doctorGift.getDoctorGiftInCase();
+        doctorGift.getDoctorGiftInCase();
         // artillery
           mouse.gotoArtillery();
        clickTrainAndReturn();
+        doctorGift.getDoctorGiftInCase();
         doctorGift.getDoctorGiftInCase();
         // shooters
          mouse.gotoShooters();
@@ -91,14 +92,8 @@ public class TrainArmy extends Thread{
         setSecond(0);
     }
     public void clickTrainAndReturn(){
-        robot.mouseMove(252,441);
-        robot.delay(2000);
-        mouse.click();
-        robot.delay(2000);
-        robot.mouseMove(400,533);
-        robot.delay(2000);
-        mouse.click(); //in this moment screen is on picking correct army
-        robot.delay(2000);
+        mouse.moveToPointAndClick(741,404);
+        strings.checkIfTrainableAndClick();
          //default train army, case enough resources
         //without option constant training, screen returns to city
     }

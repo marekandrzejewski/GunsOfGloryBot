@@ -5,7 +5,6 @@ import GunsOfGloryBot.service.*;
 import java.awt.*;
 
 public class Research {
-    Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
     ScreenMovements screenMovements = new ScreenMovements();
 
@@ -13,38 +12,32 @@ public class Research {
     }
 
     public void goToAcademyAndResearch() throws AWTException {
+        if (ImageOnScreen.isOnScreen(Strings.mapa)){
+            mouse.goToKingdomOrReturnCity();            // if we are out of city
+        }
      screenMovements.previewOfLowerCityBuildings();
      toTheAcademyAndClickResearch();
     }
 
     private void toTheAcademyAndClickResearch() {
-        robot.delay(2000);
-        robot.mouseMove(423,481);
-        robot.delay(2000);
-        mouse.click();
-        robot.delay(2000);
-        robot.mouseMove(423,461); //klik badania
-        robot.delay(2000);
-        mouse.click();
+        mouse.moveToPointAndClick(1032,506);
+        mouse.moveToPointAndClick(1073,443); //klik badania
     }
 
     public void pickGeneralCategory(){
-        robot.mouseMove(230,379);
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2000);
+       mouse.moveToPointAndClick(686,288);
     }
     public void pickDevelopCategory(){
-        robot.mouseMove(286,379);
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2000);
+        mouse.moveToPointAndClick(808,288);
     }
     public void pickFightCategory(){
-        robot.mouseMove(230,471);
-        robot.delay(2500);
-        mouse.click();
-        robot.delay(2000);
+        mouse.moveToPointAndClick(686,464);
+    }
+    public void pickDefenseCategory(){
+        mouse.moveToPointAndClick(922,288);
+    }
+    public void pickCreationCategory(){
+        mouse.moveToPointAndClick(1044,288);
     }
 
 }

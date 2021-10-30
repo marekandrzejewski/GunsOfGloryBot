@@ -10,31 +10,19 @@ public class DoctorGift {
     }
 
     public void getDoctorGiftInCase() throws AWTException {
-        Robot robot = new Robot();
         MouseActions mouse = new MouseActions();
-        robot.delay(2000);
-        robot.mouseMove(6,436);
-        robot.delay(2000);
-        mouse.click();
-        robot.delay(2000);
+        Strings strings = new Strings();
+        mouse.moveToPointAndClick(255,400);
+        mouse.moveToPointAndClick(255,400);
         screenMovements.dragAndDropUpLeftMenu();
-        robot.delay(2000);
-        robot.mouseMove(171,371); //click get gift
-        robot.delay(2000);
-        mouse.click();
-        robot.delay(2000);
-        robot.mouseMove(226,480); // get gift
-        robot.delay(2000);
-        mouse.click();
-        robot.delay(2000);
+        mouse.moveToPointAndClick(562,265); //click get gift
+        strings.checkIfCollectableAndClick();
+        strings.checkIfCollectableAndClick();   // doc OR gift !!!
 
-        robot.mouseMove(205,461); //or exit if no gift
+       /* robot.mouseMove(205,461); //or exit if no gift
         robot.delay(2000);
         mouse.click();
-        robot.delay(2000);
-        /*mouse.click();
-        robot.delay(2000);
-        robot.keyPress(KeyEvent.VK_ESCAPE);
-        robot.keyRelease(KeyEvent.VK_ESCAPE);*/
+        robot.delay(2000);*/ //TODO unnecessary??!!
+
     }
 }

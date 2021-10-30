@@ -22,91 +22,44 @@ public class MouseActions {
         robot.delay(2000);
     }
     public void goToBarracks(){
-        robot.delay(2000);
-        robot.mouseMove(6,436);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(255,400);
+        moveToPointAndClick(255,400);
         screenMovements.dragAndDropUpLeftMenu();
-        robot.delay(2000);
-        robot.mouseMove(171,433);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(564,393);
     }
     public void gotoStables(){
-        robot.delay(2000);
-        robot.mouseMove(6,436);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(255,400);
+        moveToPointAndClick(255,400);
         screenMovements.dragAndDropUpLeftMenu();
-        robot.delay(2000);
-        robot.mouseMove(171,454);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(564,434);
 
     }
     public void gotoShooters(){
-        robot.delay(2000);
-        robot.mouseMove(6,436);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(255,400);
+        moveToPointAndClick(255,400);
         screenMovements.dragAndDropUpLeftMenu();
-        robot.delay(2000);
-        robot.mouseMove(171,475);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(564,477);
 
     }
     public void gotoArtillery(){
-        robot.delay(2000);
-        robot.mouseMove(6,436);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(255,400);
+        moveToPointAndClick(255,400);
         screenMovements.dragAndDropUpLeftMenu();
-        robot.delay(2000);
-        robot.mouseMove(171,498);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(564,516);
     }
     public void closeResearchInnerScreen(){
-        robot.delay(2000);
-        robot.mouseMove(368,342); // 23.10.2021 x zwiększony o 15
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(940,204);
     }
     public void closeAcademyScreen(){
-        robot.delay(2500);
-        robot.mouseMove(433,274);
-        robot.delay(2500);
-        click();
-        robot.delay(2500);
+        moveToPointAndClick(1086,76);
     }
     public void goToKingdomOrReturnCity(){
-        robot.delay(2000);
-        robot.mouseMove(429,571);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(1075,656);
     }
     public void clickSearchInKingdomScreen() {
-        robot.mouseMove(81,505); //click search monsters or food
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(400,527);
     }
     public void goToSearch(){
-        robot.delay(2000);
-        robot.mouseMove(53,551);
-        robot.delay(2000);
-        click();
-        robot.delay(2000);
+        moveToPointAndClick(343,624);
     }
 }
