@@ -7,6 +7,7 @@ import GunsOfGloryBot.CityBuilder.CastleUpgrader;
 import GunsOfGloryBot.CityBuilder.TentMaker;
 import GunsOfGloryBot.Farmer.Farm;
 import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
+import GunsOfGloryBot.Researcher.PickPointAndClick;
 import GunsOfGloryBot.Researcher.Research;
 import GunsOfGloryBot.Researcher.ResearchInitialize;
 import GunsOfGloryBot.service.*;
@@ -42,6 +43,8 @@ public class GogBotApp {
         //test10.UpgradeCastleInit();
         //test0.previewOfLowerCityBuildings();
         Donation test12 = new Donation();
+        PickPointAndClick test15 = new PickPointAndClick();
+
         /*System.out.println(        test11.is2ndDonationNotAvaiable()
         );
         System.out.println(        test11.is3rdDonationNotAvaiable()

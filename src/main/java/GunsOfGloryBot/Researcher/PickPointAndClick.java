@@ -12,7 +12,7 @@ public class PickPointAndClick {
     MouseActions mouse = new MouseActions();
 
     int baseX = 300;
-    int baseY = 255;
+
     int accidentCounter = 0;
 
     public PickPointAndClick() throws AWTException {
@@ -28,6 +28,7 @@ public class PickPointAndClick {
                     (imageSearch.imageLocation(strings.researching))[1]
             );
             mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+            ResearchInitialize.researchOrderCounter++;
         }
         mouse.closeAcademyScreen();
     }
@@ -37,7 +38,7 @@ public class PickPointAndClick {
             baseX = 300;
             screenMovements.academyMoveRight();
         }
-        mouse.moveToPointAndClick(baseX,baseY);//top
+        mouse.moveToPointAndClick(baseX,255);//top
 
         if (strings.checkIfResearchAvaiable()){
             baseX = 300;
@@ -57,7 +58,7 @@ public class PickPointAndClick {
     public void pickMiddleAndClick(){
 
         //pick a point and click
-        mouse.moveToPointAndClick(baseX,baseY + 120); // middle
+        mouse.moveToPointAndClick(baseX,405); // middle
         if (strings.checkIfResearchAvaiable()){
             baseX = 300;
             accidentCounter = 0;
@@ -78,7 +79,7 @@ mouse.closeAcademyScreen();
     public void pickBottomAndClick(){
 
         //pick a point and click
-        mouse.moveToPointAndClick(baseX, baseY + 120);
+        mouse.moveToPointAndClick(baseX, 495);
 
         if (strings.checkIfResearchAvaiable()){
             baseX = 300;

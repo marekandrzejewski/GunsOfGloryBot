@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 public class TrainArmy extends Thread{
     int second = 0;
-
+    public static int armyOrderCounter = 0;
     ScreenMovements screenMovements = new ScreenMovements();
     ResearchInitialize researchInitialize = new ResearchInitialize();
     public Timer timer = new Timer(1000, new ActionListener() {
@@ -42,7 +42,6 @@ public class TrainArmy extends Thread{
 
     Robot robot = new Robot();
     MouseActions mouse = new MouseActions();
-    DoctorGift doctorGift = new DoctorGift();
     Strings strings = new Strings();
     public TrainArmy() throws AWTException {
     }
@@ -52,40 +51,33 @@ public class TrainArmy extends Thread{
         TentMaker tentMaker = new TentMaker();
         Farm farm = new Farm();
         AttackMonsters attackMonsters = new AttackMonsters();
-        System.out.println("wykonujemy rozkaz TRENUJ ARMIĘ, minęło 55 minut");
+        System.out.println("wykonujemy rozkaz TRENUJ ARMIĘ, minęła godzina");
         botInterface.isMakingOrders = true;
         tentMaker.setSecond(tentMaker.getSecond() - 60);
         farm.setSecond(farm.getSecond() - 60);
         attackMonsters.setSecond(attackMonsters.getSecond() - 60);
         researchInitialize.setSecond(researchInitialize.getSecond() - 60);
-        if (ImageOnScreen.isOnScreen(Strings.mapa)){
+        if (strings.checkMapInKingdom() || strings.checkBookInKingdom() || strings.checkSearchInKingdom()){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
-
-        doctorGift.getDoctorGiftInCase();
-        doctorGift.getDoctorGiftInCase();
+        strings.accidentServiceForCityActionsIfBotFroze();
         //barracks
         mouse.goToBarracks();
         clickTrainAndReturn();
-        doctorGift.getDoctorGiftInCase();
-        doctorGift.getDoctorGiftInCase();
+
         // stables
         mouse.gotoStables();
         clickTrainAndReturn();
-        doctorGift.getDoctorGiftInCase();
-        doctorGift.getDoctorGiftInCase();
+
         // artillery
           mouse.gotoArtillery();
        clickTrainAndReturn();
-        doctorGift.getDoctorGiftInCase();
-        doctorGift.getDoctorGiftInCase();
+
         // shooters
          mouse.gotoShooters();
         clickTrainAndReturn();
 
         robot.delay(5000);
-//        System.out.println("usypiamy wątek TRENUJ ARMIE na 3 minuty na czas wykonywania rozkazu TRENUJ ARMIE");
-//        Thread.sleep(180000); // 3 minuty
         botInterface.isMakingOrders = false;
         System.out.println("wykonano rozkaz TRENUJ ARMIĘ");
         setSecond(0);
@@ -101,7 +93,7 @@ public class TrainArmy extends Thread{
         screenMovements.previewOfUpperCityBuildings();
         mouse.moveToPointAndClick(652,228);
         mouse.moveToPointAndClick(759,289);
-        mouse.moveToPointAndClick(858,400);
+        mouse.moveToPointAndClick(858,420);
         mouse.moveToPointAndClick(811,511);
     }
 }

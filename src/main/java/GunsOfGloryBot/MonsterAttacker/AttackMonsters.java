@@ -57,10 +57,10 @@ public class AttackMonsters extends Thread{
         TrainArmy trainArmy = new TrainArmy();
         System.out.println("wykonujemy rozkaz ATAKUJ MOBKI, minęło 55 minut");
         botInterface.isMakingOrders = true;
-        researchInitialize.setSecond(researchInitialize.getSecond() - 300);
-        tentMaker.setSecond(tentMaker.getSecond() - 300);
-        farm.setSecond(farm.getSecond() - 300);
-        trainArmy.setSecond(trainArmy.getSecond() - 300);
+        researchInitialize.setSecond(researchInitialize.getSecond() - 500);
+        tentMaker.setSecond(tentMaker.getSecond() - 500);
+        farm.setSecond(farm.getSecond() - 500);
+        trainArmy.setSecond(trainArmy.getSecond() - 500);
         strings.checkIfAdIsVisibleAndCloseIt();
 
         for (i = 0; i < 2; i ++) {

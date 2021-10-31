@@ -1,17 +1,22 @@
 package GunsOfGloryBot.service;
 
+import GunsOfGloryBot.ArmyTrainer.TrainArmy;
 import GunsOfGloryBot.MonsterAttacker.AttackMonsters;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Strings {
 
     ImageSearch imageSearch = new ImageSearch();
     MouseActions mouse = new MouseActions();
-
+    Robot robot = new Robot();
     public static int marches;
 
+
     public static String mapa = "C:\\Users\\Admin\\Desktop\\goggraphics\\mapa.png";
+    public String bookInKingdom = "C:\\Users\\Admin\\Desktop\\goggraphics\\bookinkingdom.png";
+    public String searchInKingdom = "C:\\Users\\Admin\\Desktop\\goggraphics\\searchinkingdom.png";
     public static String giftCollectable = "C:\\Users\\Admin\\Desktop\\goggraphics\\giftcollectable.png";
     public static String docCollectable = "C:\\Users\\Admin\\Desktop\\goggraphics\\doccollectable.png";
     public static String trainable = "C:\\Users\\Admin\\Desktop\\goggraphics\\trainable.png";
@@ -32,35 +37,18 @@ public class Strings {
     public String researchInitializerNotVisible2 = "C:\\Users\\Admin\\Desktop\\goggraphics\\researchingnotvisible2.png";
     public String researchInitializerNotVisible3 = "C:\\Users\\Admin\\Desktop\\goggraphics\\researchingnotvisible3.png";
     public String reklama1badania = "C:\\Users\\Admin\\Desktop\\goggraphics\\reklamabadania.png";
-
     public Strings() throws AWTException {
     }
 
     public void checkIfTrainableAndClick(){
-        if (ImageOnScreen.isOnScreen(trainable)) {
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\trainable.png"))[0],
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\trainable.png"))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
+        checkAndClickService(trainable);
+        TrainArmy.armyOrderCounter++;
     }
     public void checkIfCollectableAndClick() {
-        if (ImageOnScreen.isOnScreen(giftCollectable)) {
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\giftcollectable.png"))[0],
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\giftcollectable.png"))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+        checkAndClickService(giftCollectable);
+        checkAndClickService(docCollectable);
         }
-        if (ImageOnScreen.isOnScreen(docCollectable)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\doccollectable.png"))[0],
-                    (imageSearch.imageLocation("C:\\Users\\Admin\\Desktop\\goggraphics\\doccollectable.png"))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
-    }
+
     public boolean ifResearchInAcademyIsInProgress(){
         if (ImageOnScreen.isOnScreen(isResearching1) && ImageOnScreen.isOnScreen(fragmentAkademii)) {
             System.out.println("badania się wykonują");
@@ -71,6 +59,16 @@ public class Strings {
     public boolean checkIfResearchAvaiable(){
         return ImageOnScreen.isOnScreen(researching);
     }
+    public boolean checkSearchInKingdom(){
+        return ImageOnScreen.isOnScreen(searchInKingdom);
+    }
+    public boolean checkBookInKingdom(){
+        return ImageOnScreen.isOnScreen(bookInKingdom);
+    }
+    public boolean checkMapInKingdom(){
+        return ImageOnScreen.isOnScreen(mapa);
+    }
+
     public boolean checkIfAcademyIsVisibleOnScreen(){
         return ImageOnScreen.isOnScreen(academyVisible);
     }
@@ -120,59 +118,41 @@ public class Strings {
         else mouse.closeAcademyScreen();
     }
     public void checkIfAcademyIsBuildingWhileTryToResearch(){
-        if (ImageOnScreen.isOnScreen(tryToResearchWhenAcademyIsBuilding)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(tryToResearchWhenAcademyIsBuilding))[0],
-                    (imageSearch.imageLocation(tryToResearchWhenAcademyIsBuilding))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
+        checkAndClickService(tryToResearchWhenAcademyIsBuilding);
     }
     public boolean isLevelInvalid(){
         return ImageOnScreen.isOnScreen(invalidMonsterLevel);
     }
 
     public void checkIfCloseXisAvaiableAndClick() {
-        if (ImageOnScreen.isOnScreen(closeXinAcademyScreen)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(closeXinAcademyScreen))[0],
-                    (imageSearch.imageLocation(closeXinAcademyScreen))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
+        checkAndClickService(closeXinAcademyScreen);
     }
     public void ifResearchingNotVisibleCloseAndMoveNext(){
-        if (ImageOnScreen.isOnScreen(researchInitializerNotVisible1)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(researchInitializerNotVisible1))[0],
-                    (imageSearch.imageLocation(researchInitializerNotVisible1))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
-        if (ImageOnScreen.isOnScreen(researchInitializerNotVisible2)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(researchInitializerNotVisible2))[0],
-                    (imageSearch.imageLocation(researchInitializerNotVisible2))[1]
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
-        if (ImageOnScreen.isOnScreen(researchInitializerNotVisible3)){
-            CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(researchInitializerNotVisible3)[0]),
-                    (imageSearch.imageLocation(researchInitializerNotVisible3)[1])
-            );
-            mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
-        }
-
+        checkAndClickService(researchInitializerNotVisible1);
+        checkAndClickService(researchInitializerNotVisible2);
+        checkAndClickService(researchInitializerNotVisible3);
     }
 
     public void checkIfAdIsVisibleAndCloseIt() {
-        if (ImageOnScreen.isOnScreen(reklama1badania)){
+        checkAndClickService(reklama1badania);
+    }
+    public void checkAndClickService(String someString){
+        if (ImageOnScreen.isOnScreen(someString)){
             CoordData coordData = new CoordData(
-                    (imageSearch.imageLocation(reklama1badania))[0],
-                    (imageSearch.imageLocation(reklama1badania))[1]
+                    (imageSearch.imageLocation(someString))[0],
+                    (imageSearch.imageLocation(someString))[1]
             );
             mouse.moveToPointAndClick(coordData.getCoordX(), coordData.getCoordY());
+        }
+    }
+    public void accidentServiceForCityActionsIfBotFroze(){
+        for (int i = 0; i < 2; i++){
+            robot.keyPress(KeyEvent.VK_ESCAPE);
+            robot.delay(200);
+            robot.keyRelease(KeyEvent.VK_ESCAPE);
+            robot.delay(200);
+            mouse.moveToPointAndClick(1031,700);
+            robot.delay(200);
         }
     }
 }

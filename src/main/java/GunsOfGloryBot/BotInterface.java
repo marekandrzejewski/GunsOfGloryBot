@@ -24,6 +24,7 @@ public class BotInterface {
     ArmyUpgrader orderArmyUpgrade = new ArmyUpgrader();
     Strings strings = new Strings();
     MouseActions mouse = new MouseActions();
+    DoctorGift orderDocGift = new DoctorGift();
 
 
     public BotInterface() throws AWTException {
@@ -37,13 +38,14 @@ public class BotInterface {
             orderTentMake.start();
             orderFarmer.start();
             orderAttackMonsters.start();
+            orderDocGift.start();
             //others
 
             while(true){
                 System.out.print("BADANIA: " + orderResearch.getSecond() / 3600 + " h " +
                         (orderResearch.getSecond() % 3600) / 60 + " min " +
                         (orderResearch.getSecond() % 3600) % 60 + " sek ");
-                System.out.print("TRENUJ ARMIĘ: " + orderTrainArmy.getSecond() / 3600 + " h " +
+                System.out.print("TRENUJ: " + orderTrainArmy.getSecond() / 3600 + " h " +
                         (orderTrainArmy.getSecond() % 3600) / 60 + " min " +
                         (orderTrainArmy.getSecond() % 3600) % 60 + " sek ");
                 System.out.print("TENT: " + orderTentMake.getSecond() / 3600 + " h " +
@@ -58,25 +60,27 @@ public class BotInterface {
                 Thread.sleep(1000);
                 System.out.println();
 
-                if ((orderResearch.getSecond() >= 1000000 && !isMakingOrders && !isResearching)) { // wprowadź czas
+                if ((orderResearch.getSecond() >= 100 && !isMakingOrders && !isResearching)) { // wprowadź czas
                     orderResearch.researchArmy();
                     isResearching = false;
                     strings.checkIfAdIsVisibleAndCloseIt();
+                    System.out.println(ResearchInitialize.researchOrderCounter);
                 }
-                if (orderTrainArmy.getSecond() >= 2342 && !isMakingOrders) { // 39 min 2 sek 2342
+                if (orderTrainArmy.getSecond() >= 3700 && !isMakingOrders) { // ponad godzina
                     orderTrainArmy.armyMontage();
                     orderTrainArmy.armyTrain();
+                    System.out.println(TrainArmy.armyOrderCounter);
                 }
-                if (orderTentMake.getSecond() >= 9999999  && !isMakingOrders) { // PRZYKŁADOWO GODZINA, POPRAW
-                    //orderTentMake.tentMakerInitialize();
+                if (orderDocGift.getSecond() >= 60  && !isMakingOrders) {
+                    strings.checkIfAdIsVisibleAndCloseIt();
+                    orderDocGift.getDoctorGiftInCase();
                 }
                 if (orderFarmer.getSecond() >= 30 && !isMakingOrders) { // 55 min 3300 sek
 //                    orderFarmer.farmFood();
 //                    Thread.sleep(5000);
 //                    orderFarmer.farmWood();
                 }
-                if (orderAttackMonsters.getSecond() >= 10  && !isMakingOrders) { // 55 min 3300 sek
-                    strings.checkIfAdIsVisibleAndCloseIt();
+                if (orderAttackMonsters.getSecond() >= 99999999  && !isMakingOrders) {
                     if (!ImageOnScreen.isOnScreen(Strings.mapa) && ImageOnScreen.isOnScreen(strings.chickInCity)) {
                         mouse.goToKingdomOrReturnCity();
                     }

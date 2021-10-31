@@ -19,6 +19,7 @@ public class ResearchInitialize extends Thread{
     //TODO sprawdź czy przy próbie zamknięcia po nieznalezieniu napisu badaj kursor nie  trafi w szare badanie
     //TODO zwiększ dynamikę badań sprawdzając czy po kliknięciu akademia/badania nie wykonuje się już badanie. I zamknij
     int second = 0;
+    public static int researchOrderCounter = 0;
     PickPointAndClick pickPointAndClick = new PickPointAndClick();
     Research research = new Research();
     MouseActions mouse = new MouseActions();
@@ -112,17 +113,24 @@ public class ResearchInitialize extends Thread{
         setSecond(0);
     }
     public void researchArmy() throws AWTException, InterruptedException {
+
         BotInterface botInterface = new BotInterface();
         TrainArmy trainArmy = new TrainArmy();
         AttackMonsters attackMonsters = new AttackMonsters();
-        System.out.println("wykonujemy badanie ARMIA, minęło 900 sekund");
+        System.out.println("wykonujemy badanie ARMIA, minęło " + getSecond() / 3600 + " h " +
+        (getSecond() % 3600) / 60 + " min " +
+                (getSecond() % 3600) % 60 + " sek ");
+
         botInterface.isMakingOrders = true;
-        trainArmy.setSecond(trainArmy.getSecond() - 60);
-        attackMonsters.setSecond(attackMonsters.getSecond() - 60);
-        if (ImageOnScreen.isOnScreen(Strings.mapa)){
+        trainArmy.setSecond(trainArmy.getSecond() - 120);
+        attackMonsters.setSecond(attackMonsters.getSecond() - 120);
+        strings.checkIfCloseXisAvaiableAndClick();
+
+        if (strings.checkMapInKingdom() || strings.checkBookInKingdom() || strings.checkSearchInKingdom()){
             mouse.goToKingdomOrReturnCity();            // if we are out of city
         }
         strings.checkIfCloseXisAvaiableAndClick();
+        strings.accidentServiceForCityActionsIfBotFroze();
         research.goToAcademyAndResearch();
 
         Thread.sleep(3000);
@@ -145,6 +153,7 @@ public class ResearchInitialize extends Thread{
         botInterface.isMakingOrders = false;
         System.out.println("wykonano rozkaz BADANIA ARMIA");
         setSecond(0);
-        //TODO ZRÓB 987/304 PRZYCISK HELP FROM ALLY
+        mouse.moveToPointAndClick(987,304); // ally help
+
     }
 }
